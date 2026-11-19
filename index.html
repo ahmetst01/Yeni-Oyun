@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#2a0f24">
+<title>Tutku Çarkı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@1,500;1,600&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--rose:#ff6b9d;--rose2:#ff8fb1;--gold:#f5c27a;--text:#fff1f4;--muted:#e8b9c8;--glass:rgba(255,255,255,.08);--line:rgba(255,255,255,.16)}
+html{background:#2a0f24}
+body{margin:0 auto;max-width:420px;min-height:100vh;padding:16px 16px 40px;font-family:'Quicksand',system-ui,sans-serif;color:var(--text);
+background:linear-gradient(165deg,#2a0f24 0%,#4a1635 50%,#7a2145 100%);background-attachment:fixed;position:relative;overflow-x:hidden}
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.hearts span{position:absolute;bottom:-40px;color:var(--rose);opacity:0;animation:float linear infinite}
+@keyframes float{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.35}90%{opacity:.2}100%{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+.wrap{position:relative;z-index:1}
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+h1{font-family:'Great Vibes',cursive;font-weight:400;font-size:42px;margin:0;color:var(--gold);text-shadow:0 0 18px rgba(255,107,157,.45)}
+.mus{display:flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:6px 10px;backdrop-filter:blur(6px)}
+.mus button{background:none;border:0;color:var(--text);font:inherit;font-size:13px;padding:2px 4px;cursor:pointer}
+.mus input{width:64px;accent-color:var(--rose)}
+.tag{text-align:center;font-family:'Playfair Display',serif;font-style:italic;color:var(--muted);font-size:14px;margin:0 0 14px}
+button{font:inherit;color:inherit;cursor:pointer}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.box{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:10px 12px;backdrop-filter:blur(6px)}
+.lbl{font-size:12px;color:var(--muted);margin-bottom:6px;letter-spacing:.03em}
+.stp{display:flex;align-items:center;gap:6px}
+.stp button{width:34px;height:34px;padding:0;font-size:18px;background:rgba(255,255,255,.1);border:1px solid var(--line);border-radius:50%}
+.stp span{font-weight:600;min-width:48px;text-align:center}
+.pb{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:4px}
+.bar{height:7px;background:rgba(255,255,255,.12);border-radius:4px;overflow:hidden;margin-bottom:14px}
+#bar{height:100%;width:100%;background:linear-gradient(90deg,var(--rose),var(--gold));transition:width 1s linear}
+.wheelw{width:300px;max-width:100%;margin:0 auto;filter:drop-shadow(0 8px 24px rgba(255,107,157,.35))}
+#spin{width:100%;height:52px;margin:14px 0;font-weight:600;font-size:18px;letter-spacing:.04em;color:#fff;border:0;border-radius:26px;
+background:linear-gradient(90deg,#ff5c93,#ff8fb1);box-shadow:0 0 22px rgba(255,107,157,.55);animation:glow 2.2s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 16px rgba(255,107,157,.45)}50%{box-shadow:0 0 30px rgba(255,107,157,.8)}}
+#spin:active{transform:scale(.98)}
+#card{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:18px 20px;text-align:center;backdrop-filter:blur(8px)}
+#name{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:30px;color:var(--gold);margin-bottom:4px;text-shadow:0 0 14px rgba(245,194,122,.35)}
+#sub{font-size:14px;color:var(--muted);line-height:1.5}
+#timerw{display:none;margin:14px 0}
+.ringw{position:relative;width:90px;height:90px;margin:0 auto}
+#tt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:600}
+.ctr{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.ctr button,.rs button{background:rgba(255,255,255,.1);border:1px solid var(--line);border-radius:18px;padding:8px 16px;font-size:14px}
+#steps{text-align:left;margin-top:12px}
+.step{opacity:0;transform:translateY(6px);animation:up .5s forwards;font-size:15px;line-height:1.55;margin:0 0 8px}
+.step b{color:var(--rose2);margin-right:6px;font-family:'Playfair Display',serif}
+@keyframes up{to{opacity:1;transform:none}}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes a1{0%,100%{transform:translateX(-26px)}50%{transform:translateX(-5px)}}
+@keyframes a2{0%,100%{transform:translateX(26px)}50%{transform:translateX(5px)}}
+.pop{animation:pop .55s ease-out}
+.c1{animation:a1 1.6s ease-in-out infinite}
+.c2{animation:a2 1.6s ease-in-out infinite}
+.rs{text-align:center;margin-top:14px}
+.rs button{font-size:13px}
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts"></div>
+<div class="wrap">
+
+<div class="top">
+  <h1>Tutku Çarkı</h1>
+  <div class="mus"><button id="mbtn">♪ Müzik: kapalı</button><input type="range" id="vol" min="0" max="100" value="60" aria-label="Müzik sesi"></div>
+</div>
+<p class="tag">Çevirin, gelen pozisyonda birlikte keyfini çıkarın</p>
+
+<div class="row2">
+  <div class="box"><div class="lbl">Toplam süre</div>
+    <div class="stp"><button id="tm">−</button><span id="tv">15 dk</span><button id="tp">+</button></div></div>
+  <div class="box"><div class="lbl">Pozisyon süresi</div>
+    <div class="stp"><button id="pm">−</button><span id="pv">90 sn</span><button id="pp">+</button></div></div>
+</div>
+
+<div class="pb"><span>Kalan toplam süre</span><span id="rem">15:00</span></div>
+<div class="bar"><div id="bar"></div></div>
+
+<div class="wheelw">
+  <svg viewBox="0 0 300 310" width="100%">
+    <g transform="translate(0,10)">
+      <g id="wheel" style="transform-origin:150px 150px"></g>
+      <circle cx="150" cy="150" r="143" fill="none" stroke="#f5c27a" stroke-width="3"/>
+      <circle cx="150" cy="150" r="24" fill="#2a0f24" stroke="#f5c27a" stroke-width="2.5"/>
+      <text x="150" y="159" text-anchor="middle" font-size="24" fill="#ff6b9d">♥️</text>
+    </g>
+    <polygon points="136,0 164,0 150,26" fill="#f5c27a" stroke="#2a0f24" stroke-width="1.5"/>
+  </svg>
+</div>
+
+<button id="spin">Çarkı çevir</button>
+
+<div id="card">
+  <svg viewBox="0 0 120 44" width="120" height="44" style="display:block;margin:0 auto 6px">
+    <circle class="c1" cx="60" cy="22" r="14" fill="#ff6b9d"/>
+    <circle class="c2" cx="60" cy="22" r="14" fill="#f5c27a" fill-opacity="0.85"/>
+  </svg>
+  <div id="name">Hazır mısınız?</div>
+  <div id="sub">Çarkı çevirin, gelen pozisyon burada görünecek.</div>
+  <div id="timerw">
+    <div class="ringw">
+      <svg viewBox="0 0 84 84" width="90" height="90" style="transform:rotate(-90deg)">
+        <circle cx="42" cy="42" r="36" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="5"/>
+        <circle id="ring" cx="42" cy="42" r="36" fill="none" stroke="#f5c27a" stroke-width="5" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="0" style="transition:stroke-dashoffset 1s linear"/>
+      </svg>
+      <div id="tt">1:30</div>
+    </div>
+    <div class="ctr"><button id="pause">Duraklat</button><button id="skip">Atla</button></div>
+  </div>
+  <div id="steps"></div>
+</div>
+
+<div class="rs"><button id="reset">Seansı sıfırla</button></div>
+</div>
+
+<script>
+const hs=document.getElementById('hearts');
+for(let i=0;i<14;i++){const s=document.createElement('span');s.textContent='♥️';
+  s.style.left=Math.random()*100+'%';s.style.fontSize=(12+Math.random()*22)+'px';
+  s.style.animationDuration=(12+Math.random()*14)+'s';s.style.animationDelay=(-Math.random()*20)+'s';hs.appendChild(s)}
+
+const P=[
+{n:'Kaşık',s:['İkiniz de yan yatın, aynı yöne bakın.','Partner arkadan sarılsın, dizler hafifçe kıvrılsın.','Yavaş ve rahat bir ritim tutun.'],t:'Boyun altına küçük bir yastık koyun.'},
+{n:'Misyoner',s:['Biriniz sırtüstü uzansın.','Diğeri yüzü yüze üzerine gelsin.','Sarılarak, öpüşerek ritmi birlikte belirleyin.'],t:'Yakınlık ve göz teması için en klasik seçenek.'},
+{n:'Kadın üstte',s:['Partner sırtüstü yatsın.','Kadın dizlerinin üzerinde üste geçsin.','Hız ve derinliği kadın belirlesin.'],t:'Eller birbirine tutunursa denge kolaylaşır.'},
+{n:'Lotus',s:['Partner bağdaş kurup otursun.','Karşısına oturup bacaklarınızı beline dolayın.','Birbirinize sarılıp yavaşça sallanın.'],t:'Alınlarınızı birbirine dayayıp nefesinizi eşleyin.'},
+{n:'Arkadan',s:['Kadın dirsek ve dizlerinin üzerine gelsin.','Partner arkasında diz çöksün.','Rahat edeceğiniz açıyı birlikte ayarlayın.'],t:'Göğüs altına yastık koymak belini rahatlatır.'},
+{n:'Sandalye',s:['Partner sağlam bir sandalyeye otursun.','Kadın yüzü ona dönük üzerine otursun.','Sandalyenin sırtına yaslanıp ritmi bulun.'],t:'Kolçaksız, sabit bir sandalye seçin.'},
+{n:'Ayakta sarılma',s:['Yüz yüze, birbirinize iyice yaklaşın.','Biriniz duvara hafifçe yaslansın.','Boy farkı varsa ayak ucunda yükselin ya da sığ bir basamak kullanın.'],t:'Kısa sürede enerji katar, kaymayan bir zemin seçin.'},
+{n:'Yatak kenarı',s:['Kadın yatağın kenarında sırtüstü uzansın.','Partner yatağın önünde ayakta ya da diz üstü dursun.','Bacaklar omuzlara ya da belin çevresine gelsin.'],t:'Kalçanın altına yastık koyun, açı değişir.'},
+{n:'Makas',s:['İkiniz de yan yatıp birbirinize dönün.','Bacaklarınızı makas gibi iç içe geçirin.','Kalçalarınızla küçük, yavaş hareketler yapın.'],t:'Ellerin serbest kalması okşamaya fırsat verir.'},
+{n:'Ters biniş',s:['Partner sırtüstü uzansın.','Kadın üzerine ters yönde, yani ayaklara bakarak otursun.','Ellerini partnerin dizlerine ya da yatağa dayasın.'],t:'Partner kalçayı elleriyle destekleyebilir.'},
+{n:'Yastıklı köprü',s:['Kadın sırtüstü yatsın, kalçasının altına sağlam bir yastık koysun.','Partner dizlerinin üzerinde karşısına geçsin.','Yüksek açı sayesinde yavaş ilerleyin.'],t:'Yastık sert olmasın, belin doğal kavsini korusun.'},
+{n:'Yan yana',s:['Yüz yüze, yan yatın.','Üstteki bacak partnerin beline gelsin.','Birbirinize sarılıp sakin ve uzun bir tempo tutun.'],t:'Yorulmadan uzun süre devam etmeye en uygun pozisyon.'}
+];
+const cols=['#ff6b9d','#b0457f','#ff8e7a','#8e44ad'];
+const W=document.getElementById('wheel'),N=P.length,SEG=360/N,R=140,NS='http://www.w3.org/2000/svg';
+const pt=(a,r)=>[150+r*Math.sin(a*Math.PI/180),150-r*Math.cos(a*Math.PI/180)];
+P.forEach((p,i)=>{
+  const a0=i*SEG,a1=(i+1)*SEG,[x0,y0]=pt(a0,R),[x1,y1]=pt(a1,R);
+  const path=document.createElementNS(NS,'path');
+  path.setAttribute('d',`M150 150 L${x0} ${y0} A${R} ${R} 0 0 1 ${x1} ${y1} Z`);
+  path.setAttribute('fill',cols[i%4]);path.setAttribute('stroke','#2a0f24');path.setAttribute('stroke-width','1.2');
+  W.appendChild(path);
+  const g=document.createElementNS(NS,'g');g.setAttribute('transform',`rotate(${a0+SEG/2-90} 150 150)`);
+  const t=document.createElementNS(NS,'text');
+  t.setAttribute('x','270');t.setAttribute('y','154');t.setAttribute('text-anchor','end');
+  t.setAttribute('font-size','12.5');t.setAttribute('font-weight','600');t.setAttribute('fill','#fff');
+  t.setAttribute('font-family','Quicksand,sans-serif');
+  t.textContent=p.n;g.appendChild(t);W.appendChild(g);
+});
+
+const $=id=>document.getElementById(id);
+let totalMin=15,per=90,elapsed=0,left=0,dur=0,rot=0,used=[],spinning=false,running=false,paused=false,timer=null,lock=null;
+const fmt=s=>{s=Math.max(0,s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+
+function ui(){
+  $('tv').textContent=totalMin+' dk';$('pv').textContent=per+' sn';
+  const rem=totalMin*60-elapsed;
+  $('rem').textContent=fmt(rem);
+  $('bar').style.width=Math.max(0,rem/(totalMin*60)*100)+'%';
+}
+$('tm').onclick=()=>{totalMin=Math.max(5,totalMin-5);ui()};
+$('tp').onclick=()=>{totalMin=Math.min(60,totalMin+5);ui()};
+$('pm').onclick=()=>{per=Math.max(30,per-15);ui()};
+$('pp').onclick=()=>{per=Math.min(300,per+15);ui()};
+
+async function keepAwake(){try{if(navigator.wakeLock)lock=await navigator.wakeLock.request('screen')}catch(e){}}
+function release(){try{lock&&lock.release();lock=null}catch(e){}}
+
+let ac=null,master=null,musicOn=false,userMuted=false,chordTimer=null,ci=0;
+const CH=[[174.61,220,261.63,329.63],[220,261.63,329.63,392],[261.63,329.63,392,493.88],[196,246.94,293.66,329.63]];
+const BELL=[523.25,587.33,659.25,783.99,880];
+function initAudio(){
+  if(ac)return;
+  ac=new (window.AudioContext||window.webkitAudioContext)();
+  master=ac.createGain();master.gain.value=0;
+  const lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=1600;
+  const len=ac.sampleRate*3,buf=ac.createBuffer(2,len,ac.sampleRate);
+  for(let c=0;c<2;c++){const d=buf.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.5)}
+  const conv=ac.createConvolver();conv.buffer=buf;
+  const wet=ac.createGain();wet.gain.value=.7;
+  master.connect(lp);lp.connect(ac.destination);lp.connect(conv);conv.connect(wet);wet.connect(ac.destination);
+}
+function tone(f,t,d,type,peak,att){
+  const o=ac.createOscillator(),g=ac.createGain();
+  o.type=type;o.frequency.value=f;o.detune.value=(Math.random()-.5)*8;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(peak,t+att);g.gain.linearRampToValueAtTime(0,t+d);
+  o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.1);
+}
+function playBar(){
+  const t=ac.currentTime+.05,ch=CH[ci%4];ci++;
+  ch.forEach(f=>{tone(f,t,9,'sine',.07,2.5);tone(f/2,t,9,'triangle',.04,3)});
+  for(let k=0;k<4;k++){const f=BELL[Math.floor(Math.random()*BELL.length)];tone(f,t+1+k*2+Math.random()*.6,2.6,'sine',.05,.02)}
+}
+function setVol(){if(master)master.gain.setTargetAtTime(musicOn?$('vol').value/100:0,ac.currentTime,.6)}
+function music(on){
+  musicOn=on;
+  if(on){
+    initAudio();ac.resume();
+    if(!chordTimer){playBar();chordTimer=setInterval(playBar,8000)}
+  }else{clearInterval(chordTimer);chordTimer=null}
+  setVol();
+  $('mbtn').textContent='♪ Müzik: '+(on?'açık':'kapalı');
+}
+$('mbtn').onclick=()=>{userMuted=musicOn;music(!musicOn)};
+$('vol').oninput=setVol;
+
+function spin(){
+  if(spinning||running)return;
+  if(!musicOn&&!userMuted)music(true);
+  if(totalMin*60-elapsed<=0){elapsed=0;used=[];ui()}
+  if(used.length>=N)used=[];
+  const pool=P.map((_,i)=>i).filter(i=>!used.includes(i));
+  const idx=pool[Math.floor(Math.random()*pool.length)];
+  used.push(idx);
+  const jit=(Math.random()-0.5)*SEG*0.6;
+  const target=((-(idx+0.5)*SEG-jit)%360+360)%360;
+  const cur=((rot%360)+360)%360;
+  let d=target-cur;if(d<0)d+=360;
+  rot+=360*5+d;
+  spinning=true;keepAwake();
+  $('spin').style.opacity='.6';$('spin').textContent='Dönüyor…';
+  $('timerw').style.display='none';$('steps').innerHTML='';
+  $('name').textContent='Çark dönüyor…';$('sub').textContent='';
+  W.style.transition='transform 4s cubic-bezier(.17,.67,.12,1)';
+  W.style.transform='rotate('+rot+'deg)';
+  setTimeout(()=>{spinning=false;start(idx)},4150);
+}
+function start(idx){
+  const p=P[idx];
+  const card=$('card');card.classList.remove('pop');void card.offsetWidth;card.classList.add('pop');
+  $('name').textContent=p.n;$('sub').textContent='İpucu: '+p.t;
+  $('steps').innerHTML=p.s.map((s,i)=>`<p class="step" style="animation-delay:${0.4+i*0.5}s"><b>${i+1}.</b>${s}</p>`).join('');
+  const rem=totalMin*60-elapsed;
+  dur=left=Math.max(1,Math.min(per,rem));
+  running=true;paused=false;$('pause').textContent='Duraklat';
+  $('timerw').style.display='block';
+  $('ring').style.transition='none';$('ring').style.strokeDashoffset='0';
+  setTimeout(()=>{$('ring').style.transition='stroke-dashoffset 1s linear'},50);
+  $('tt').textContent=fmt(left);$('spin').textContent='Süre işliyor…';
+  clearInterval(timer);timer=setInterval(tick,1000);ui();
+}
+function tick(){
+  if(paused)return;
+  left--;elapsed++;
+  $('tt').textContent=fmt(left);
+  $('ring').style.strokeDashoffset=String(226.2*(1-left/dur));
+  ui();
+  if(left<=0||totalMin*60-elapsed<=0)end();
+}
+function end(){
+  clearInterval(timer);running=false;
+  try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}
+  $('spin').style.opacity='1';
+  if(totalMin*60-elapsed<=0){
+    $('name').textContent='Seans bitti';$('sub').textContent='Hepsi bu kadar. Birbirinize sarılıp dinlenin.';
+    $('timerw').style.display='none';$('steps').innerHTML='';$('spin').textContent='Yeni seans başlat';release();
+  }else{
+    $('sub').textContent='Süre doldu. Sıradaki pozisyon için çarkı çevirin.';
+    $('timerw').style.display='none';$('spin').textContent='Çarkı çevir';
+  }
+}
+$('spin').onclick=spin;
+$('pause').onclick=()=>{paused=!paused;$('pause').textContent=paused?'Devam et':'Duraklat'};
+$('skip').onclick=()=>{if(running)end()};
+$('reset').onclick=()=>{
+  clearInterval(timer);running=false;spinning=false;paused=false;elapsed=0;used=[];release();
+  $('name').textContent='Hazır mısınız?';$('sub').textContent='Çarkı çevirin, gelen pozisyon burada görünecek.';
+  $('timerw').style.display='none';$('steps').innerHTML='';
+  $('spin').textContent='Çarkı çevir';$('spin').style.opacity='1';ui();
+};
+ui();
+</script>
+</body>
+</html>
